@@ -1,0 +1,126 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\geometry{margin=1in}
+
+\title{\textbf{Efficient Machine Unlearning via SISA: Implementation and Analysis}}
+\author{Student ID: b22es006}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Abstract}
+This report details the implementation and evaluation of the SISA (Sharded, Isolated, Sliced, Aggregated) framework for machine unlearning on the CIFAR-10 dataset. I explore the trade-offs between model utility, unlearning efficiency, and privacy preservation. By partitioning the training data into $K=20$ shards and $S=3$ slices, I demonstrate the mechanics of selective retraining. I analyze the impact of random deletion distributions on retraining time, highlighting scenarios where SISA provides significant speedups versus cases where it incurs overhead. Finally, I connect these concepts to modern Foundation Model workflows using Parameter-Efficient Fine-Tuning (PEFT) methods like LoRA.
+
+
+\subsection{Introduction}
+The "Right to be Forgotten" mandates that machine learning models must be able to "unlearn" data upon request. Naive full retraining is computationally prohibitive. SISA proposes a solution by partitioning data to limit the influence of any single data point, allowing for targeted retraining of only the affected model components.
+
+\subsection{Methodology}
+
+\subsubsection{Architectural Intrinsics}
+To adhere to the constraint of $\le 1$ million parameters while maintaining reasonable performance on CIFAR-10, I designed a custom \texttt{SmallCIFAR10CNN}.
+\begin{itemize}
+    \item \textbf{Base Architecture}: A 6-layer Convolutional Neural Network with Batch Normalization and Dropout.
+    \item \textbf{Optimization}: I reduced the channel dimensions (32, 64, 128) compared to standard VGG-style blocks.
+    \item \textbf{Parameter Count}: The resulting model has approximately \textbf{300,000 parameters}, well within the 1M limit.
+\end{itemize}
+
+\subsubsection{SISA Implementation Details}
+My pipeline implements the four pillars of SISA:
+\begin{enumerate}
+    \item \textbf{Sharding ($K=20$)}: The 45,000 training samples are partitioned into 20 disjoint shards. This high shard count was chosen to maximize isolation, though it trades off generalization accuracy.
+    \item \textbf{Slicing ($S=3$)}: Each shard is further divided into 3 chronological slices.
+    \item \textbf{Isolation}: Training occurs sequentially within a shard. The model for slice $s$ is initialized with the weights of slice $s-1$. Crucially, shards do not interact during training.
+    \item \textbf{Aggregation}: At inference time, the logits (pre-softmax outputs) from all 20 shard models are averaged to produce the final prediction. This \textit{Logit Ensemble} approach proved more stable than weight averaging.
+\end{enumerate}
+
+\subsection{Experimental Setup}
+I evaluated the pipeline on a single GPU (simulated sharding) under the following scenarios:
+\begin{itemize}
+    \item \textbf{Baseline}: Full training of all shards and slices.
+    \item \textbf{Random Deletion (1\% and 5\%)}: Removing 450 and 2,250 samples uniformly at random.
+    \item \textbf{Micro-Deletion (0.02\%)}: Removing $\approx 9$ samples to simulate sparse user requests.
+\end{itemize}
+
+\subsection{Results and Analysis}
+
+\subsubsection{Utility: Accuracy vs. Deletion}
+I observed a baseline accuracy of approximately \textbf{54.3\%}. This is lower than a standard ResNet (usually >90\%) due to the extreme data fragmentation ($K=20$ means each model sees only 5\% of the data).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../results/figures/fig1_accuracy_vs_deleted.png}
+    \caption{Test accuracy remains stable across deletion percentages (0.02\%: 54.7\%, 1\%: 54.6\%, 5\%: 54.1\%), indicating that removing small fractions of data does not significantly harm the ensemble's decision boundary.}
+    \label{fig:acc}
+\end{figure}
+
+\subsubsection{Efficiency: The Impact of Deletion Density}
+A critical observation in my trials was the efficiency trade-off with random deletions.
+
+\begin{table}[H]
+    \centering
+    \caption{SISA Performance Metrics ($K=20, S=3$)}
+    % \input{../results/table1.csv} % You can convert CSV to LaTeX table here
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{\% Deleted} & \textbf{Retrained Slices} & \textbf{Fraction Retrained} & \textbf{Time Saved (s)} \\
+        \midrule
+        0.02\% & 17 / 60 & 28.3\% & +638.4s (71.8\% saved) \\
+        1.0\% & 60 / 60 & 100\% & +11.2s (1.2\% saved) \\
+        5.0\% & 60 / 60 & 100\% & +31.1s (3.5\% saved) \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:metrics}
+\end{table}
+
+\textbf{Reasoning}: 
+\begin{itemize}
+    \item \textbf{Micro-Deletion (0.02\%)}: Only 9 samples were deleted. This impacted only 17 out of 60 slices (28\%), allowing SISA to skip retraining for the majority of the shards. This resulted in a massive \textbf{71.8\% time saving} (638s) compared to the baseline training time of 888s.
+    \item \textbf{Random Deletion (1\% \& 5\%)}: With $K=20$ and uniform random deletion of 1\% (450 samples), the probability of a shard containing at least one deleted sample is near 100\%.
+    \[ P(\text{hit}) = 1 - (1 - \frac{1}{K})^{N_{deleted}} \approx 1 \]
+    Consequently, \textbf{every shard had to be retrained}. The small positive time savings (+11s, +31s) are likely due to system variance or slightly faster convergence on smaller datasets, but effectively, SISA degenerated into full retraining.
+\end{itemize}
+
+SISA is most effective for \textit{sparse} or \textit{correlated} deletions (e.g., removing all data from a specific user), as demonstrated by the Micro-Deletion trial.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../results/figures/fig2_time_saved.png}
+    \caption{Time savings are massive for sparse deletions (0.02\%) but diminish to near zero for dense random deletions (1\%, 5\%) due to the high probability of shard collisions.}
+    \label{fig:time}
+\end{figure}
+
+\subsubsection{Privacy: Membership Inference Attack (MIA)}
+I conducted a confidence-based MIA to assess privacy risks.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../results/figures/fig3_mia_auc.png}
+    \caption{AUC scores for Baseline (0.501), Naive Retraining (0.498), and SISA (0.498). All scores are near 0.5, indicating that the model does not leak membership information (random guess). This suggests that the high sharding ($K=20$) acts as a strong regularizer, preventing overfitting and thus mitigating MIA risks.}
+    \label{fig:mia}
+\end{figure}
+
+\subsection{Connection to Foundation Models}
+While SISA is demonstrated here on a small CNN, its principles are directly applicable to Large Language Models (LLMs) via Parameter-Efficient Fine-Tuning (PEFT).
+
+\begin{itemize}
+    \item \textbf{SISA Shards $\approx$ LoRA Adapters}: In an FM workflow, I can treat different data sources (or users) as separate shards. Instead of training the base model, I train a lightweight Low-Rank Adapter (LoRA) for each shard.
+    \item \textbf{Instant Unlearning}: If a user requests deletion, I simply \textbf{delete their specific LoRA adapter}. This is equivalent to a SISA retrain cost of zero.
+    \item \textbf{Inference}: The system serves the base model + the relevant set of active adapters, similar to my Logit Ensemble aggregation.
+\end{itemize}
+
+\subsection{Conclusion}
+I successfully implemented a SISA pipeline that adheres to strict parameter constraints. My results highlight the "No Free Lunch" theorem in unlearning: high sharding ($K=20$) improves isolation potential but degrades accuracy and fails to save time under uniform random deletion attacks. The framework shines in scenarios of sparse deletion requests, offering a scalable path for privacy compliance in the era of Foundation Models.
+
+\end{document}

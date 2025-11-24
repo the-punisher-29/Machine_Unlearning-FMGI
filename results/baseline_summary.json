@@ -1,0 +1,10 @@
+{
+  "test_acc": 0.5428,
+  "test_f1": 0.5305471002309128,
+  "test_loss": 1.269478952407837,
+  "baseline_time": 888.2677540779114,
+  "num_params": 6114120,
+  "num_train_samples": 45000,
+  "num_shards": 20,
+  "num_slices": 3
+}

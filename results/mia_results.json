@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "mia_auc": 0.5012279999999996,
+    "member_mean_conf": 0.49068956261525554,
+    "nonmember_mean_conf": 0.48876964509487153
+  },
+  "naive_delete": {
+    "mia_auc": 0.49799114888888857,
+    "member_mean_conf": 0.48509555375973384,
+    "nonmember_mean_conf": 0.4855340909302235
+  },
+  "sisa_unlearn": {
+    "mia_auc": 0.4977254555555556,
+    "member_mean_conf": 0.48720231232179534,
+    "nonmember_mean_conf": 0.4875992863357067
+  }
+}

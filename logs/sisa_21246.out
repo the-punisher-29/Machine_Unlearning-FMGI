@@ -1,0 +1,166 @@
+Running SISA pipeline on GPU: cn01
+===============================
+Starting: Baseline SISA training
+Command: python -m code.cli baseline --num-shards 20 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Files already downloaded and verified
+Files already downloaded and verified
+Baseline shards:   0%|          | 0/20 [00:00<?, ?it/s]
+Shard 0 slices:   0%|          | 0/3 [00:00<?, ?it/s][A
+
+shard00_slice00 | epoch 1/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 1/20:   0%|          | 0/6 [00:04<?, ?it/s, loss=2.3833][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3833][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3885][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3646][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3403][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3100][A[A
+
+shard00_slice00 | epoch 1/20:  17%|█▋        | 1/6 [00:04<00:20,  4.03s/it, loss=2.3047][A[A
+
+shard00_slice00 | epoch 1/20: 100%|██████████| 6/6 [00:04<00:00,  1.92it/s, loss=2.3047][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 2/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 2/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=2.2332][A[A
+
+shard00_slice00 | epoch 2/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.2332][A[A
+
+shard00_slice00 | epoch 2/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.2012][A[A
+
+shard00_slice00 | epoch 2/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.1849][A[A
+
+shard00_slice00 | epoch 2/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.1846][A[A
+
+shard00_slice00 | epoch 2/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.1826][A[A
+
+shard00_slice00 | epoch 2/20:  83%|████████▎ | 5/6 [00:00<00:00,  7.95it/s, loss=2.1826][A[A
+
+shard00_slice00 | epoch 2/20:  83%|████████▎ | 5/6 [00:00<00:00,  7.95it/s, loss=2.1735][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 3/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 3/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=2.0843][A[A
+
+shard00_slice00 | epoch 3/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.0843][A[A
+
+shard00_slice00 | epoch 3/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.0836][A[A
+
+shard00_slice00 | epoch 3/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.0787][A[A
+
+shard00_slice00 | epoch 3/20:  17%|█▋        | 1/6 [00:00<00:03,  1.43it/s, loss=2.0718][A[A
+
+shard00_slice00 | epoch 3/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.14it/s, loss=2.0718][A[A
+
+shard00_slice00 | epoch 3/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.14it/s, loss=2.0640][A[A
+
+shard00_slice00 | epoch 3/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.14it/s, loss=2.0581][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 4/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 4/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=1.9680][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=1.9680][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=2.0059][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=1.9906][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=1.9844][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=1.9623][A[A
+
+shard00_slice00 | epoch 4/20:  17%|█▋        | 1/6 [00:00<00:03,  1.30it/s, loss=1.9657][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 5/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 5/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=1.9335][A[A
+
+shard00_slice00 | epoch 5/20:  17%|█▋        | 1/6 [00:00<00:03,  1.40it/s, loss=1.9335][A[A
+
+shard00_slice00 | epoch 5/20:  17%|█▋        | 1/6 [00:00<00:03,  1.40it/s, loss=1.9698][A[A
+
+shard00_slice00 | epoch 5/20:  17%|█▋        | 1/6 [00:00<00:03,  1.40it/s, loss=1.9300][A[A
+
+shard00_slice00 | epoch 5/20:  17%|█▋        | 1/6 [00:00<00:03,  1.40it/s, loss=1.9396][A[A
+
+shard00_slice00 | epoch 5/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.11it/s, loss=1.9396][A[A
+
+shard00_slice00 | epoch 5/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.11it/s, loss=1.9330][A[A
+
+shard00_slice00 | epoch 5/20:  67%|██████▋   | 4/6 [00:00<00:00,  6.11it/s, loss=1.9181][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 6/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 6/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=1.8538][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8538][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8436][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8388][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8520][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8649][A[A
+
+shard00_slice00 | epoch 6/20:  17%|█▋        | 1/6 [00:00<00:03,  1.29it/s, loss=1.8805][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 7/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 7/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=1.8092][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8092][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8099][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8272][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8534][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8311][A[A
+
+shard00_slice00 | epoch 7/20:  17%|█▋        | 1/6 [00:00<00:03,  1.33it/s, loss=1.8256][A[A
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 8/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+shard00_slice00 | epoch 8/20:   0%|          | 0/6 [00:00<?, ?it/s, loss=1.8031][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.8031][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.7718][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.7751][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.7827][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.7708][A[A
+
+shard00_slice00 | epoch 8/20:  17%|█▋        | 1/6 [00:00<00:02,  1.86it/s, loss=1.7841][A[Aslurmstepd-cn01: error: *** JOB 21246 ON cn01 CANCELLED AT 2025-11-23T23:36:23 ***
+
+
+                                                                                        [A[A
+
+shard00_slice00 | epoch 9/20:   0%|          | 0/6 [00:00<?, ?it/s][A[A

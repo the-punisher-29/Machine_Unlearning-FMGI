@@ -1,0 +1,155 @@
+Running SISA pipeline on GPU: cn07
+===============================
+Starting: Baseline SISA training
+Command: python -m code.cli baseline --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: Baseline SISA training in 0 minutes
+===============================
+Starting: Selective retraining after 1% deletion
+Command: python -m code.cli deletion --percent 0.01 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: Selective retraining after 1% deletion in 0 minutes
+===============================
+Starting: Selective retraining after 5% deletion
+Command: python -m code.cli deletion --percent 0.05 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: Selective retraining after 5% deletion in 0 minutes
+===============================
+Starting: Naive full retrain (1%)
+Command: python -m code.cli naive-delete --percent 0.01 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: Naive full retrain (1%) in 0 minutes
+===============================
+Starting: Naive full retrain (5%)
+Command: python -m code.cli naive-delete --percent 0.05 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: Naive full retrain (5%) in 0 minutes
+===============================
+Starting: MIA comparison (1%)
+Command: python -m code.cli mia --percent 0.01 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: MIA comparison (1%) in 0 minutes
+===============================
+Starting: MIA comparison (5%)
+Command: python -m code.cli mia --percent 0.05 --num-shards 10 --num-slices 3 --epochs 20 --batch-size 128 --optimizer adam --device cuda --output-dir results --checkpoint-dir results/checkpoints
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/cli.py", line 10, in <module>
+    from .experiments import (
+  File "/csehome/p23cs0006/A2/code/experiments.py", line 15, in <module>
+    from .sisa import SISAOrchestrator
+  File "/csehome/p23cs0006/A2/code/sisa.py", line 313
+    if shard_id in slice_impacts:
+                                 ^
+IndentationError: unindent does not match any outer indentation level
+Finished: MIA comparison (5%) in 0 minutes
+===============================
+Starting: Generate plots + Table 1
+Command: python -m code.report_artifacts --results-dir results --figures-dir results/figures --table-path results/table1.csv
+===============================
+Traceback (most recent call last):
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/csehome/p23cs0006/A2/code/report_artifacts.py", line 61, in <module>
+    main()
+  File "/csehome/p23cs0006/A2/code/report_artifacts.py", line 54, in main
+    plot_accuracy_vs_deleted(deletion_csv, figures_dir / "fig1_accuracy_vs_deleted.png")
+  File "/csehome/p23cs0006/A2/code/plotting.py", line 12, in plot_accuracy_vs_deleted
+    df = pd.read_csv(deletion_csv)
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+  File "/csehome/p23cs0006/miniconda3/envs/assi/lib/python3.10/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'results/deletion_results.csv'
+Finished: Generate plots + Table 1 in 0 minutes
+All SISA steps finished!
