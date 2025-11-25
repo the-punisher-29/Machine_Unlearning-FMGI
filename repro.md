@@ -33,4 +33,4 @@ The CIFAR-10 dataset is automatically downloaded to the `data/` directory when y
 - `report/report.pdf`
 
 ## Commands
-All experiment commands are listed in `commands.ps1` for convenience. Execute them from the repository root using PowerShell.
+All experiment commands are listed in `run_sisa.slurm` for convenience. Execute them from the repository root.
